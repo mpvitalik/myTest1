@@ -28,7 +28,7 @@ public class Auth {
         WebElement button = driver.findElement(By.xpath("//div[@id=\"page-container\"]/div[1]/div/form/div[2]/div/div/button"));
 
         mail.click();
-        mail.sendKeys("ivanaleksandrov2012@gmail.com");
+        mail.sendKeys("ivanaleksandrov20120@gmail.com");
         password.click();
         password.sendKeys("qqq111qqq");
         button.click();
