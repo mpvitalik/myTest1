@@ -37,11 +37,11 @@ public class Logout {
         WebElement menuButton = driver.findElement(By.xpath("//div[@id=\"headerControlPanel\"]/div[1]/div[2]/button"));
         menuButton.click();
         Thread.sleep(1000);
-        WebElement logoutLink = driver.findElement(By.xpath("//*[@id=\"headerControlPanelPlaceholder\"]/header/div[1]/div[2]/div/div/span[2]"));
+        WebElement logoutLink = driver.findElement(By.xpath("//div[@id=\"headerControlPanelPlaceholder\"]/header/div[1]/div[2]/div/div/span[2]"));
         logoutLink.click();
         Thread.sleep(1000);
 
-        WebElement signInLink = driver.findElement(By.xpath("//*[@id=\"headerControlPanel\"]/div[1]/div[1]/ul/li[1]/a"));
+        WebElement signInLink = driver.findElement(By.xpath("//div[@id=\"headerControlPanel\"]/div[1]/div[1]/ul/li[1]/a"));
         String signInLinkText = signInLink.getText();
         Assert.assertEquals("Sign In", signInLinkText);
     }
