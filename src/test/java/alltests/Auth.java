@@ -1,6 +1,5 @@
 package alltests;
 
-import io.qameta.allure.Attachment;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
@@ -37,11 +36,6 @@ public class Auth {
         WebElement nickName = driver.findElement(By.xpath("//div[@id=\"headerControlPanel\"]/div[1]/div[1]/ul/li[1]/a"));
         String nickNameText = nickName.getText();
         Assert.assertEquals("sashamga2", nickNameText);
-    }
-
-    @Attachment(value = "Page screenshot", type = "../myTest1/src/driver/screenshots")
-    public byte[] saveScreenshot(byte[] screenShot) {
-        return screenShot;
     }
 
     @After
