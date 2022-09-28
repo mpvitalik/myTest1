@@ -4,11 +4,10 @@ import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-import org.openqa.selenium.By;
-import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
+import java.io.IOException;
+
 
 public class Auth {
     private WebDriver driver;
@@ -20,7 +19,7 @@ public class Auth {
     }
 
     @Test
-    public void testAuth() throws NoSuchElementException, InterruptedException {
+    public void testAuth() throws NoSuchElementException, InterruptedException, IOException {
         driver.get("https://rc.conquestador.com/en-int/login");
 
         WebElement mail = driver.findElement(By.xpath("//div[@id=\"page-container\"]/div[1]/div/form/div[1]/div[1]/div/span/input"));
@@ -36,11 +35,12 @@ public class Auth {
         WebElement nickName = driver.findElement(By.xpath("//div[@id=\"headerControlPanel\"]/div[1]/div[1]/ul/li[1]/a"));
         String nickNameText = nickName.getText();
         Assert.assertEquals("sashamga2", nickNameText);
+
     }
 
     @After
     public void stop() {
         driver.quit();
-        driver = null;
+        //driver = null;
     }
 }
