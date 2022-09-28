@@ -34,7 +34,7 @@ public class Cashier {
         button.click();
         Thread.sleep(3000);
 
-        driver.findElement(By.xpath("//div[@id=\"headerControlPanel\"]/div[1]/div[1]/ul/li[4]/a")).click();
+        driver.findElement(By.xpath("//div[@id=\"headerControlPanel\"]/div[1]/div[1]/ul/li[5]/a/span")).click();
         Thread.sleep(10000);
 
         //Проверка, что касса загрузилась
