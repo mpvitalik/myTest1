@@ -41,6 +41,6 @@ public class Auth {
     @After
     public void stop() {
         driver.quit();
-        //driver = null;
+        driver = null;
     }
 }
