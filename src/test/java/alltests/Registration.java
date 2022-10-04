@@ -15,8 +15,10 @@
 //
 //    @Before
 //    public void start() {
+//        ChromeOptions options = new ChromeOptions();
+//        options.addArguments("--disable-notifications");
 //        System.setProperty("webdriver.chrome.driver","../myTest1/src/driver/chromedriver");
-//        driver = new ChromeDriver();
+//        driver = new ChromeDriver(options);
 //    }
 //
 //    @Test

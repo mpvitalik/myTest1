@@ -9,14 +9,17 @@ import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 
 public class Profile {
     private WebDriver driver;
 
     @Before
     public void start() {
+        ChromeOptions options = new ChromeOptions();
+        options.addArguments("--disable-notifications");
         System.setProperty("webdriver.chrome.driver","../myTest1/src/driver/chromedriver");
-        driver = new ChromeDriver();
+        driver = new ChromeDriver(options);
     }
 
     @Test

@@ -9,14 +9,17 @@ import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 
 public class Menulinks {
     private WebDriver driver;
 
     @Before
     public void start() {
-        System.setProperty("webdriver.chrome.driver", "../myTest1/src/driver/chromedriver");
-        driver = new ChromeDriver();
+        ChromeOptions options = new ChromeOptions();
+        options.addArguments("--disable-notifications");
+        System.setProperty("webdriver.chrome.driver","../myTest1/src/driver/chromedriver");
+        driver = new ChromeDriver(options);
     }
 
     @Test
@@ -24,7 +27,7 @@ public class Menulinks {
 
         driver.get("https://rc.conquestador.com/en-int/");
 
-        WebElement agreeButton = driver.findElement(By.xpath("//div[@id=\"root\"]/ul/li/div/div[2]/button"));
+        WebElement agreeButton = driver.findElement(By.cssSelector("div.notification-list > div > div.ui-notification-button-box.ub-box-szg_border-box > button"));
         agreeButton.click();
         Thread.sleep(1000);
 
