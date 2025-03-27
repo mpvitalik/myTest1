@@ -28,7 +28,7 @@ public class Cashier {
         driver.get("https://bons.com/login");
 
         // Добавляем cookies, сохранённые в первом классе
-        for (Cookie cookie : BetaTest.cookies) {
+        for (Cookie cookie : Auth.cookies) {
             driver.manage().addCookie(cookie);
         }
         Thread.sleep(1000);
