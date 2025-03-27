@@ -114,6 +114,8 @@ public class Profile {
         String historyGamesTitleText = historyGamesTitle.getText();
         Assert.assertEquals("Games", historyGamesTitleText);
 
+        ((JavascriptExecutor) driver).executeScript("window.scrollBy(0, 300);"); // Скроллим вниз на 300 пикселей
+
         WebElement historyNotifications = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@id=\"page-container\"]/div[1]/div[2]/div[1]/div/div[6]/div/a[3]/div")));
         actions.moveToElement(historyNotifications).click().perform();
         Thread.sleep(1000);

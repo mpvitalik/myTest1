@@ -33,11 +33,12 @@ public class Cashier {
         }
         Thread.sleep(1000);
         driver.navigate().refresh();  // Обновляем страницу, чтобы авторизация применилась
+        Thread.sleep(2000);
 
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));  // Ожидание до 10 секунд
 
         // Переходим в кассу
-        WebElement depositButton = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//a[text()='Deposit']")));
+        WebElement depositButton = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//li/a[text()='Deposit']")));
         depositButton.click();
         //driver.findElement(By.xpath("//div[@id=\"headerControlPanel\"]/div[1]/div[1]/ul/li[5]/a/span")).click();
         Thread.sleep(3000);
