@@ -114,7 +114,9 @@
                 <version>2.22.2</version>
                 <configuration>
                     <includes>
-                        <include>**/alltests/*</include>
+                        <!--<include>**/alltests/*</include>-->
+                        <include>**/alltests/Auth.java</include>  <!-- Запуск Auth первым -->
+                        <include>**/*.java</include>  <!-- Затем остальные -->
                     </includes>
                     <argLine>
                         -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar"
