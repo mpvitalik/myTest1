@@ -7,6 +7,10 @@ import org.junit.Test;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+import java.time.Duration;
 
 public class Cashier {
     private WebDriver driver;
@@ -15,33 +19,38 @@ public class Cashier {
     public void start() {
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--disable-notifications");
-        System.setProperty("webdriver.chrome.driver","../myTest1/src/driver/chromedriver");
+        System.setProperty("webdriver.chrome.driver","/Users/vitalii/IdeaProjects/wd/chromedriver");
         driver = new ChromeDriver(options);
     }
 
     @Test
     public void testCashier() throws NoSuchElementException, InterruptedException {
-        driver.get("https://rc.conquestador.com/en-int/login");
-        WebElement mail = driver.findElement(By.xpath("//div[@id=\"page-container\"]/div[1]/div/form/div[1]/div[1]/div/span/input"));
-        WebElement password = driver.findElement(By.xpath("//div[@id=\"page-container\"]/div[1]/div/form/div[1]/div[2]/div/span/input"));
-        WebElement button = driver.findElement(By.xpath("//div[@id=\"page-container\"]/div[1]/div/form/div[2]/div/div/button"));
-        WebElement agreeButton = driver.findElement(By.cssSelector("div.notification-list > div > div.ui-notification-button-box.ub-box-szg_border-box > button"));
+        driver.get("https://bons.com/login");
 
-        agreeButton.click();
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));  // Ожидание до 10 секунд
+
+        WebElement mail = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("login")));
+        WebElement password = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div/span/input[@name='password']")));
+        WebElement button = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div/button[text()='Sign in']")));
+
         mail.click();
-        mail.sendKeys("ivanaleksandrov2012+186@gmail.com");
+        mail.sendKeys("ivanaleksandrov2012@gmail.com");
         password.click();
         password.sendKeys("qqq111qqq");
+        Thread.sleep(3000);
         button.click();
         Thread.sleep(3000);
 
-        driver.findElement(By.xpath("//div[@id=\"headerControlPanel\"]/div[1]/div[1]/ul/li[5]/a/span")).click();
-        Thread.sleep(10000);
+        // Переходим в кассу
+        WebElement depositButton = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//a[text()='Deposit']")));
+        depositButton.click();
+        //driver.findElement(By.xpath("//div[@id=\"headerControlPanel\"]/div[1]/div[1]/ul/li[5]/a/span")).click();
+        Thread.sleep(3000);
 
         //Проверка, что касса загрузилась
-        driver.switchTo().frame(driver.findElement(By.id("cashIframe")));
-        Assert.assertEquals("All payment methods", driver.findElement(By.xpath("//div[@id=\"cabbagino\"]/div[2]/div/h4"))
-                .getText());
+        WebElement cashierName = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//h4[text()='All payment methods']")));
+        String cashierNameText = cashierName.getText();
+        Assert.assertEquals("All payment methods", cashierNameText);
     }
 
     @After

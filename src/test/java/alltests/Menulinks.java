@@ -10,6 +10,10 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+import java.time.Duration;
 
 public class Menulinks {
     private WebDriver driver;
@@ -18,48 +22,36 @@ public class Menulinks {
     public void start() {
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--disable-notifications");
-        System.setProperty("webdriver.chrome.driver","../myTest1/src/driver/chromedriver");
+        System.setProperty("webdriver.chrome.driver","/Users/vitalii/IdeaProjects/wd/chromedriver");
         driver = new ChromeDriver(options);
     }
 
     @Test
     public void testMenulinks() throws NoSuchElementException, InterruptedException {
 
-        driver.get("https://rc.conquestador.com/en-int/");
+        driver.get("https://bons.com/login");
 
-        WebElement agreeButton = driver.findElement(By.cssSelector("div.notification-list > div > div.ui-notification-button-box.ub-box-szg_border-box > button"));
-        agreeButton.click();
-        Thread.sleep(1000);
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));  // Ожидание до 10 секунд
 
-        WebElement slots = driver.findElement(By.xpath("//div[@id=\"page-container\"]/div[1]/div[2]/div[1]/a[3]/span"));
+        WebElement casinoLink = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//a/p[text()='Casino']")));
+        casinoLink.click();
+        WebElement slots = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//a/span[text()='Slots']")));
         String slotsText = slots.getText();
         Assert.assertEquals("SLOTS", slotsText);
 
-        WebElement menuButton = driver.findElement(By.xpath("//div[@id=\"headerControlPanel\"]/div[1]/div[2]/button"));
-        menuButton.click();
-        Thread.sleep(1000);
-
-        WebElement liveDealers = driver.findElement(By.xpath("//div[@id=\"headerControlPanelPlaceholder\"]/header/div[1]/div[2]/div/ul/li[3]/a"));
-        liveDealers.click();
+        WebElement ldLink = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//a/p[text()='Live Сasino']")));
+        ldLink.click();
         Thread.sleep(3000);
-
-        WebElement roulette = driver.findElement(By.xpath("//div[@id=\"page-container\"]/div[1]/div[2]/div[1]/a[3]/span"));
+        WebElement roulette = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//a/span[text()='Roulette']")));
         String rouletteText = roulette.getText();
         Assert.assertEquals("ROULETTE", rouletteText);
 
-        menuButton.click();
-        Thread.sleep(1000);
-        WebElement promotions = driver.findElement(By.xpath("//div[@id=\"headerControlPanelPlaceholder\"]/header/div[1]/div[2]/div/ul/li[4]/a"));
-        promotions.click();
-        Thread.sleep(1000);
+        WebElement sportsLink = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//a/p[text()='Sports']")));
+        sportsLink.click();
+        Thread.sleep(5000);
 
-        WebElement tournaments = driver.findElement(By.xpath("//div[@id=\"page-container\"]/div[1]/ul/li[2]/a"));
-        tournaments.click();
-        Thread.sleep(1000);
+        //driver.switchTo().frame(driver.findElement(By.id("cashIframe")));
 
-        WebElement upcomingTournaments = driver.findElement(By.xpath("//div[@id=\"page-container\"]/div[1]/div/div[2]/h2"));
-        String upcomingTournamentsText = upcomingTournaments.getText();
-        Assert.assertEquals("Upcoming tournaments:", upcomingTournamentsText);
     }
 
     @After

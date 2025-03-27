@@ -21,34 +21,32 @@ public class Auth {
     public void start() {
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--disable-notifications");
-        System.setProperty("webdriver.chrome.driver","../myTest1/src/driver/chromedriver");
+        System.setProperty("webdriver.chrome.driver","/Users/vitalii/IdeaProjects/wd/chromedriver");
         driver = new ChromeDriver(options);
     }
 
     @Test
     public void testAuth() throws NoSuchElementException, InterruptedException, IOException {
-        driver.get("https://rc.conquestador.com/login");
+        driver.get("https://bons.com/login");
 
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));  // Ожидание до 10 секунд
-        WebElement mail = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("login")));
 
-        //WebElement mail = driver.findElement(By.id("login"));
-        WebElement password = driver.findElement(By.xpath("//*[@id=\"page-container\"]/div[1]/div/form/div[1]/div[2]/div/div/span/input"));
-        WebElement button = driver.findElement(By.xpath("//*[@id=\"page-container\"]/div[1]/div/form/div[2]/button"));
+        WebElement mail = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("login")));
+        WebElement password = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div/span/input[@name='password']")));
+        WebElement button = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div/button[text()='Sign in']")));
 
         mail.click();
-        mail.sendKeys("ivanaleksandrov2012+186@gmail.com");
+        mail.sendKeys("ivanaleksandrov2012@gmail.com");
         password.click();
         password.sendKeys("qqq111qqq");
         Thread.sleep(3000);
         button.click();
         Thread.sleep(3000);
 
-        WebElement nickName = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//p[text()='sasha#1259']")));
+        WebElement nickName = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//p[text()='ivano']")));
 
-        //WebElement nickName = driver.findElement(By.xpath("//p[text()='sasha#1259']"));
         String nickNameText = nickName.getText();
-        Assert.assertEquals("sasha#1259", nickNameText);
+        Assert.assertEquals("ivano", nickNameText);
 
     }
 

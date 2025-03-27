@@ -10,6 +10,10 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+import java.time.Duration;
 
 public class Logout {
     private WebDriver driver;
@@ -18,37 +22,39 @@ public class Logout {
     public void start() {
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--disable-notifications");
-        System.setProperty("webdriver.chrome.driver","../myTest1/src/driver/chromedriver");
+        System.setProperty("webdriver.chrome.driver","/Users/vitalii/IdeaProjects/wd/chromedriver");
         driver = new ChromeDriver(options);
     }
 
     @Test
     public void testLogout() throws NoSuchElementException, InterruptedException {
-        driver.get("https://rc.conquestador.com/en-int/login");
+        driver.get("https://bons.com/login");
 
-        WebElement mail = driver.findElement(By.xpath("//div[@id=\"page-container\"]/div[1]/div/form/div[1]/div[1]/div/span/input"));
-        WebElement password = driver.findElement(By.xpath("//div[@id=\"page-container\"]/div[1]/div/form/div[1]/div[2]/div/span/input"));
-        WebElement button = driver.findElement(By.xpath("//div[@id=\"page-container\"]/div[1]/div/form/div[2]/div/div/button"));
-        WebElement agreeButton = driver.findElement(By.cssSelector("div.notification-list > div > div.ui-notification-button-box.ub-box-szg_border-box > button"));
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));  // Ожидание до 10 секунд
 
-        agreeButton.click();
+        WebElement mail = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("login")));
+        WebElement password = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div/span/input[@name='password']")));
+        WebElement button = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div/button[text()='Sign in']")));
+
         mail.click();
-        mail.sendKeys("ivanaleksandrov2012+186@gmail.com");
+        mail.sendKeys("ivanaleksandrov2012@gmail.com");
         password.click();
         password.sendKeys("qqq111qqq");
+        Thread.sleep(3000);
         button.click();
         Thread.sleep(3000);
 
-        WebElement menuButton = driver.findElement(By.xpath("//div[@id=\"headerControlPanel\"]/div[1]/div[2]/button"));
+        WebElement menuButton = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div/button[@aria-label='Menu']")));
         menuButton.click();
         Thread.sleep(1000);
-        WebElement logoutLink = driver.findElement(By.className("side-menu__link"));
+        WebElement logoutLink = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//button/span[text()='Log out']")));
         logoutLink.click();
         Thread.sleep(1000);
 
-        WebElement signInLink = driver.findElement(By.xpath("//div[@id=\"headerControlPanel\"]/div[1]/div[1]/ul/li[1]/a"));
-        String signInLinkText = signInLink.getText();
-        Assert.assertEquals("Sign In", signInLinkText);
+        // Проверяем, что вышли
+        WebElement signUpLink = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//a[text()='Sign Up']")));
+        String signUpLinkText = signUpLink.getText();
+        Assert.assertEquals("Sign Up", signUpLinkText);
     }
 
     @After
