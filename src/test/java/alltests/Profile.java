@@ -28,20 +28,15 @@ public class Profile {
     public void testProfile() throws NoSuchElementException, InterruptedException {
         driver.get("https://bons.com/login");
 
+        // Добавляем cookies, сохранённые в первом классе
+        for (Cookie cookie : BetaTest.cookies) {
+            driver.manage().addCookie(cookie);
+        }
+        Thread.sleep(1000);
+        driver.navigate().refresh();  // Обновляем страницу, чтобы авторизация применилась
+
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));  // Ожидание до 10 секунд
         Actions actions = new Actions(driver); // Вместо клика. Для более точного клика
-
-        WebElement mail = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("login")));
-        WebElement password = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div/span/input[@name='password']")));
-        WebElement button = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div/button[text()='Sign in']")));
-
-        mail.click();
-        mail.sendKeys("ivanaleksandrov2012@gmail.com");
-        password.click();
-        password.sendKeys("qqq111qqq");
-        Thread.sleep(2000);
-        button.click();
-        Thread.sleep(3000);
 
         WebElement nickName = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//p[text()='ivano']")));
         actions.moveToElement(nickName).click().perform();

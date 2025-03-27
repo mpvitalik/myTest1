@@ -12,9 +12,11 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.io.IOException;
 import java.time.Duration;
+import java.util.Set;
 
 
 public class Auth {
+    public static Set<Cookie> cookies;  // Статическая переменная для хранения cookies
     private WebDriver driver;
 
     @Before
@@ -42,6 +44,8 @@ public class Auth {
         Thread.sleep(3000);
         button.click();
         Thread.sleep(3000);
+
+        cookies = driver.manage().getCookies();  // Сохранение cookies
 
         WebElement nickName = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//p[text()='ivano']")));
 
