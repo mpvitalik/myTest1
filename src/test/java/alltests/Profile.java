@@ -99,6 +99,8 @@ public class Profile {
         String privacyTitleText = privacyTitle.getText();
         Assert.assertEquals("Privacy", privacyTitleText);
 
+        ((JavascriptExecutor) driver).executeScript("window.scrollBy(0, 300);"); // Скроллим вниз на 300 пикселей
+
         WebElement history = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@class='profile-account-menu__main_item profile-account-menu__main_sub']/p[text()='History']")));
         actions.moveToElement(history).click().perform();
         Thread.sleep(1000);
