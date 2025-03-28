@@ -27,14 +27,14 @@ public class Profile {
     @Test
     public void testProfile() throws NoSuchElementException, InterruptedException {
         driver.get("https://bons.com/login");
+        Thread.sleep(2000);
 
         // Добавляем cookies, сохранённые в первом классе
         for (Cookie cookie : Auth.cookies) {
             driver.manage().addCookie(cookie);
         }
-        Thread.sleep(1000);
         driver.navigate().refresh();  // Обновляем страницу, чтобы авторизация применилась
-        Thread.sleep(1000);
+        Thread.sleep(2000);
 
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));  // Ожидание до 10 секунд
         Actions actions = new Actions(driver); // Вместо клика. Для более точного клика
