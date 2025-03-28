@@ -34,6 +34,7 @@ public class Profile {
         }
         Thread.sleep(1000);
         driver.navigate().refresh();  // Обновляем страницу, чтобы авторизация применилась
+        Thread.sleep(1000);
 
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));  // Ожидание до 10 секунд
         Actions actions = new Actions(driver); // Вместо клика. Для более точного клика
