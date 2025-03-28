@@ -115,11 +115,7 @@
                 <configuration>
                     <includes>
                         <!--<include>**/alltests/*</include>-->
-                        <include>**/alltests/Auth.java</include>    <!-- Сначала Auth -->
-                        <include>**/alltests/Cashier.java</include> <!-- Затем другие -->
-                        <include>**/alltests/Profile.java</include>
-                        <include>**/alltests/Logout.java</include>
-                        <include>**/alltests/Menulinks.java</include>
+                        <include>**/alltests/Auth.java</include>
                     </includes>
                     <argLine>
                         -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar"
