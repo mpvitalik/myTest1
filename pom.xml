@@ -118,6 +118,9 @@
                         <include>**/alltests/Auth.java</include>
                         <include>**/*.java</include>
                     </includes>
+                    <excludes>
+                        <exclude>**/alltests/Auth.java</exclude>
+                    </excludes>
                     <argLine>
                         -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar"
                     </argLine>
