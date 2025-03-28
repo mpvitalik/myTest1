@@ -27,12 +27,13 @@ public class Cashier {
     @Test
     public void testCashier() throws NoSuchElementException, InterruptedException {
         driver.get("https://bons.com/login");
+        Thread.sleep(2000);
 
         // Добавляем cookies, сохранённые в первом классе
         for (Cookie cookie : Auth.cookies) {
             driver.manage().addCookie(cookie);
         }
-        Thread.sleep(1000);
+
         driver.navigate().refresh();  // Обновляем страницу, чтобы авторизация применилась
         Thread.sleep(2000);
 
