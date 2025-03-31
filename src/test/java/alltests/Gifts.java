@@ -27,13 +27,14 @@ public class Gifts {
     @Test
     public void testProfile() throws NoSuchElementException, InterruptedException {
         driver.get("https://bons.com/login");
+        Thread.sleep(2000);
 
         // Добавляем cookies, сохранённые в первом классе
         for (Cookie cookie : Auth.cookies) {
             driver.manage().addCookie(cookie);
         }
-        Thread.sleep(1000);
         driver.navigate().refresh();  // Обновляем страницу, чтобы авторизация применилась
+        Thread.sleep(2000);
 
         driver.navigate().to("https://bons.com/account/promo/promotions");
         Thread.sleep(2000);
