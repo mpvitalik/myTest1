@@ -18,7 +18,11 @@ public class Cashier {
 
     @Before
     public void start() {
+        boolean headless = Boolean.parseBoolean(System.getProperty("headless", "true"));
         ChromeOptions options = new ChromeOptions();
+        if (headless) {
+            options.addArguments("--headless");
+        }
         options.addArguments("--disable-notifications");
         System.setProperty("webdriver.chrome.driver","/Users/vitalii/IdeaProjects/wd/chromedriver");
         driver = new ChromeDriver(options);
@@ -43,7 +47,6 @@ public class Cashier {
         // Переходим в кассу
         WebElement depositButton = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//li/a[text()='Deposit']")));
         depositButton.click();
-        //driver.findElement(By.xpath("//div[@id=\"headerControlPanel\"]/div[1]/div[1]/ul/li[5]/a/span")).click();
         Thread.sleep(3000);
 
         //Проверка, что касса загрузилась

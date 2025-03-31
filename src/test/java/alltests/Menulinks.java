@@ -20,7 +20,11 @@ public class Menulinks {
 
     @Before
     public void start() {
+        boolean headless = Boolean.parseBoolean(System.getProperty("headless", "true"));
         ChromeOptions options = new ChromeOptions();
+        if (headless) {
+            options.addArguments("--headless");
+        }
         options.addArguments("--disable-notifications");
         System.setProperty("webdriver.chrome.driver","/Users/vitalii/IdeaProjects/wd/chromedriver");
         driver = new ChromeDriver(options);

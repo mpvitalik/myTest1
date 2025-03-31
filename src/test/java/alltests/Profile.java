@@ -18,9 +18,13 @@ public class Profile {
 
     @Before
     public void start() {
+        boolean headless = Boolean.parseBoolean(System.getProperty("headless", "true"));
         ChromeOptions options = new ChromeOptions();
+        if (headless) {
+            options.addArguments("--headless");
+        }
         options.addArguments("--disable-notifications");
-        System.setProperty("webdriver.chrome.driver","../myTest1/src/driver/chromedriver");
+        System.setProperty("webdriver.chrome.driver","/Users/vitalii/IdeaProjects/wd/chromedriver");
         driver = new ChromeDriver(options);
     }
 
