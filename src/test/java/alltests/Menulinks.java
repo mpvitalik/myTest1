@@ -43,14 +43,14 @@ public class Menulinks {
         String slotsText = slots.getText();
         Assert.assertEquals("SLOTS", slotsText);
 
-        WebElement ldLink = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//a/p[text()='Live Сasino']")));
+        WebElement ldLink = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@class='ui-head-tabs']/a[2]/p[text()='Live Casino']")));
         ldLink.click();
         Thread.sleep(3000);
         WebElement roulette = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//a/span[text()='Roulette']")));
         String rouletteText = roulette.getText();
         Assert.assertEquals("ROULETTE", rouletteText);
 
-        WebElement sportsLink = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//a/p[text()='Sports']")));
+        WebElement sportsLink = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@class='ui-head-tabs']/a[1]/p[text()='Sport']")));
         sportsLink.click();
         Thread.sleep(5000);
 
